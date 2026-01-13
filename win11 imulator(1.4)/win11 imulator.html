@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 11 imulator </title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/window.css">
+</head>
+<body>
+
+    <div id="dev-splash">made by nikika</div>
+
+    <div id="hacked-screen">
+        <div class="hacked-title">ОС ВЗЛОМАНА</div>
+        <div>ВРЕМЯ ИСТЕКЛО</div>
+        <button class="hacked-btn" onclick="location.reload()">ПЕРЕЗАГРУЗИТЬ СИСТЕМУ</button>
+    </div>
+
+    <div id="virus-notification">
+        <div class="v-header"><span>🛡️</span> <b>Критическая угроза!</b></div>
+        <div class="v-msg">
+            Обнаружен Trojan.Win32.Miner<br>
+            Взрыв через: <span id="timer-display" style="color:red; font-weight:bold;">60</span> сек.<br>
+            Напишите <span class="v-code">clear</span> в терминале!
+        </div>
+    </div>
+
+    <div id="boot-screen">
+        <h1>Windows 11</h1>
+        <div class="loader"></div>
+    </div>
+
+    <div id="desktop" onclick="toggleStart(false)">
+        <div id="wallpaper-text">made by nikika</div>
+    </div>
+
+    <div id="start-menu">
+        <input type="text" class="search-box" placeholder="Поиск...">
+        <div class="pinned" id="start-pinned"></div>
+    </div>
+
+    <div id="taskbar">
+        <div class="tb-icons">
+            <div class="tb-btn win-icon" onclick="toggleStart(true)">
+                <svg viewBox="0 0 88 88" width="24" height="24" fill="#0078d4"><path d="M0 12.4l35.7-4.9.02 34.4L0 41.9V12.4zm35.7 33.5l.03 34.5L.03 75.5.02 46.1l35.6-.2zm4.3-37.5L88 1.6v39.3L40 41.1V8.4zm0 36.6L88 45.2v39.8l-48-6.7V45z"/></svg>
+            </div>
+            <div class="tb-btn" onclick="wm.toggle('edge')">
+                <img src="logo.png" style="width:26px" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg'">
+            </div>
+            <div class="tb-btn" onclick="wm.toggle('notepad')">📝</div>
+            <div class="tb-btn" onclick="wm.toggle('cmd')">💻</div>
+        </div>
+        <div class="tray">
+            <div id="clock">12:00</div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/wm.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
+
+                case 'cmd':
+                    return {
+                        title: 'Terminal',
+                        html: `
+                        <div style="background:black; color:#0f0; height:100%; padding:10px; font-family:monospace; overflow-y:auto;" onclick="document.getElementById('cmd-in').focus()">
+                            <div>Microsoft Windows [Version 10.0.22631]</div>
+                            <div>(c) Microsoft Corporation. All rights reserved.</div>
+                            <br>
+                            <div id="cmd-history"></div>
+                            <div style="display:flex;">
+                                <span>C:\\Users\\Admin></span>
+                                <input type="text" id="cmd-in" style="background:transparent; color:#0f0; border:none; outline:none; flex:1; font-family:monospace;" onkeydown="handleCmd(event)">
+                            </div>
+                        </div>`
+                    };
+                case 'notepad': return { title: 'Notepad', html: '<textarea style="width:100%; height:100%; border:none; resize:none; padding:10px; outline:none; font-family:monospace;" placeholder="Пиши здесь..."></textarea>' };
+                default: return { title: 'App', html: 'App content' };
+            }
+        }
+    }
+
+    const wm = new WindowManager();
+
+    function handleCmd(e) {
+        if(e.key === 'Enter') {
+            const input = e.target.value.trim();
+            const history = document.getElementById('cmd-history');
+            history.innerHTML += `<div>C:\\Users\\Admin> ${input}</div>`;
+            
+            if(input === 'clear') {
+                if(isVirusActive) {
+                    clearVirus();
+                    history.innerHTML += `<div style="color:#0f0; font-weight:bold;">✅ [SYSTEM] Вирус успешно удален!</div>`;
+                } else {
+                    history.innerHTML += `<div style="color:#aaa;">Вирусов не обнаружено. Консоль не требует очистки.</div>`;
+                }
+            } else if (input === 'help') {
+                history.innerHTML += `<div>Commands: clear, help, date, echo</div>`;
+            } else {
+                history.innerHTML += `<div>'${input}' is not recognized.</div>`;
+            }
+
+            e.target.value = '';
+            e.target.parentNode.parentNode.scrollTop = e.target.parentNode.parentNode.scrollHeight;
+        }
+    }
+</script>
+</body>
+</html>

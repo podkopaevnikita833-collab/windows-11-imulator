@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 15px; }
+        .card { padding: 15px; border: 1px solid #ddd; border-radius: 8px; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 5px #eee; }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px #ddd; }
+        .icon { font-size: 24px; margin-bottom: 5px; }
+        a { text-decoration: none; color: black; display: block; }
+    </style>
+</head>
+<body>
+    <img src="../logo.png" width="80" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/9/98/Microsoft_Edge_logo_%282019%29.svg'">
+    <h2>Nikika Edge</h2>
+    <div class="grid">
+        <a href="voogle.html"><div class="card"><div class="icon" style="color:#4285F4">G</div>Google</div></a>
+        <a href="youtube.html"><div class="card"><div class="icon" style="color:red">▶</div>YouTube</div></a>
+        <a href="discord.html"><div class="card"><div class="icon" style="color:#5865F2">💬</div>Discord</div></a>
+        <a href="minecraft.html"><div class="card"><div class="icon" style="color:green">👾</div>Free MC</div></a>
+    </div>
+</body>
+</html>
